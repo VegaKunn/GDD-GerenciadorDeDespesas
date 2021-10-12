@@ -1,7 +1,6 @@
 import { formatDate } from "../../organizador/dataFilter";
 import { categories } from "../../data/categories";
 export const TableArea = ({ list }) => {
-  console.log(categories.mensalidade.cor);
   return (
     <table className="tabela">
       <thead>

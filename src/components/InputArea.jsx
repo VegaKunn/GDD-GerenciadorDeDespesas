@@ -1,96 +1,84 @@
-import { categories } from "../../data/categories";
 import { useState } from "react";
 
-export const InputArea = ({ onAdd }) => {
+export default function InputArea({ Add }) {
   const [dateField, setDateField] = useState("");
   const [categoryField, setCategoryField] = useState("");
   const [titleField, setTitleField] = useState("");
-  const [valueField, setValueField] = useState(0);
+  const [valueField, setValueField] = useState();
 
-  let categoryKeys = Object.keys(categories);
-
-  const handleAddEvent = () => {
-    let errors = [];
-
-    if (isNaN(new Date(dateField).getTime())) {
-      errors.push("Data inválida!");
-    }
-    if (!categoryKeys.includes(categoryField)) {
-      errors.push("Categoria inválida!");
-    }
-    if (titleField === "") {
-      errors.push("Título vazio!");
-    }
-    if (valueField <= 0) {
-      errors.push("Valor inválido!");
-    }
-
-    if (errors.length > 0) {
-      alert(errors.join("\n"));
-    } else {
-      onAdd({
-        date: new Date(dateField),
-        category: categoryField,
-        title: titleField,
-        value: valueField,
-      });
-      clearFields();
-    }
+  const handAddEvent = () => {
+    Add({
+      data: new Date(dateField),
+      categoria: categoryField,
+      titulo: titleField,
+      value: valueField,
+    });
+    clearFields;
   };
 
   const clearFields = () => {
     setDateField("");
     setCategoryField("");
     setTitleField("");
-    setValueField(0);
+    setValueField();
   };
+
   return (
-    <div>
-      <div>
-        <label>Data</label>
+    <div className="divInputArea">
+      <div className="labelInputArea">
+        <label className="tituloInputArea">Data</label>
         <input
+          required
+          className="inputInputArea"
           type="date"
           value={dateField}
           onChange={(e) => setDateField(e.target.value)}
         />
       </div>
-      <div>
-        <label>Categoria</label>
-        <input type="text" />
+      <div className="labelInputArea">
+        <label className="tituloInputArea">Categoria</label>
+
         <select
+          required
+          className="selectInputArea"
           value={categoryField}
           onChange={(e) => setCategoryField(e.target.value)}
         >
+          <option></option>
           <>
-            <option></option>
-            {categoryKeys.map((key, index) => (
-              <option key={index} value={key}>
-                {categories[key].title}
-              </option>
-            ))}
+            <option value="comida">comida</option>
+            <option value="mensalidade">mensalidade</option>
+            <option value="renda">renda</option>
           </>
         </select>
       </div>
 
-      <div>
-        <label>Titulo</label>
+      <div className="labelInputArea">
+        <label className="tituloInputArea">Titulo</label>
         <input
+          required
+          className="inputInputArea"
           type="text"
           value={titleField}
           onChange={(e) => setTitleField(e.target.value)}
         />
       </div>
-      <div>
-        <label>Valor</label>
+      <div className="labelInputArea">
+        <label className="tituloInputArea">Valor</label>
         <input
+          required
+          className="inputInputArea"
           type="number"
           value={valueField}
           onChange={(e) => setValueField(parseFloat(e.target.value))}
         />
       </div>
-      <div>
-        <button onClick={handleAddEvent}>Adicionar</button>
+      <div className="labelInputArea">
+        <label className="gambiarra">.</label>
+        <button className="buttonInputArea" onClick={handAddEvent}>
+          Adicionar
+        </button>
       </div>
     </div>
   );
-};
+}

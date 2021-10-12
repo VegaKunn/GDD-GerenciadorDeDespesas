@@ -1,3 +1,4 @@
+/*
 export default function TabelaItem(item) {
   return (
     <tr>
@@ -8,3 +9,4 @@ export default function TabelaItem(item) {
     </tr>
   );
 }
+*/

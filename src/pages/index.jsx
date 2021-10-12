@@ -4,7 +4,8 @@ import { filterListByMonth, getCurrentMonth } from "../organizador/dataFilter";
 import { useEffect, useState } from "react";
 import { TableArea } from "../components/tabela/TableArea";
 import InfoArea from "../components/InfoArea";
-import { InputArea } from "../components/teste1";
+import InputArea from "../components/InputArea";
+import Teste from "../components/tabela/teste";
 
 export default function Gdd() {
   const [list, setList] = useState(items);
@@ -40,6 +41,7 @@ export default function Gdd() {
     let newList = [...list];
     newList.push(items);
     setList(newList);
+    var add = handleAddItem;
   };
 
   return (
@@ -54,7 +56,7 @@ export default function Gdd() {
           income={income}
           expense={expense}
         />
-
+        <InputArea Add={handleAddItem} />
         {filteredList && <TableArea list={filteredList} />}
       </section>
     </main>
