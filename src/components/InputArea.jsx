@@ -7,20 +7,30 @@ export default function InputArea({ Add }) {
   const [valueField, setValueField] = useState();
 
   const handAddEvent = () => {
+    if (isNaN(new Date(dateField).getTime())) {
+      return alert("preencha a data corretamente");
+    } else if ((categoryField !== "comida") | "mensalidade" | "renda") {
+      return alert("preencha categoria corretamente");
+    } else if (titleField == "") {
+      return alert("preencha o titulo corretamente");
+    } else if (valueField <= 0) {
+      return alert("preencha o valor corretamente");
+    }
+
     Add({
       data: new Date(dateField),
       categoria: categoryField,
       titulo: titleField,
       value: valueField,
     });
-    clearFields;
+    clearFields();
   };
 
   const clearFields = () => {
     setDateField("");
     setCategoryField("");
     setTitleField("");
-    setValueField();
+    setValueField(0);
   };
 
   return (
